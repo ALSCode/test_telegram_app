@@ -1,12 +1,10 @@
-import { config } from './config.js';
-
 const tg = window.Telegram.WebApp;
 tg.expand();
 
 // Загрузка сообщений при открытии
 async function loadMessages() {
     try {
-        const response = await fetch(`/api/get-messages/${tg.initDataUnsafe.user.id}`, {
+        const response = await fetch(`${window.appConfig.API_URL}/get-messages/${tg.initDataUnsafe.user.id}`, {
             headers: {
                 'X-Telegram-Init-Data': tg.initData
             }
@@ -35,7 +33,7 @@ async function sendMessage() {
     if (!text) return;
 
     try {
-        const response = await fetch('/api/save-message', {
+        const response = await fetch(`${window.appConfig.API_URL}/save-message`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
